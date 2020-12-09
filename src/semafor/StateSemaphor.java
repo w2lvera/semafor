@@ -37,6 +37,11 @@ public class StateSemaphor implements Runnable {
 
     public void changeState() {
         state.changeColor();
+        try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Green.class.getName()).log(Level.SEVERE, null, ex);
+            }
         gm.setColor(colorEnum);
     }
 
@@ -83,11 +88,7 @@ public class StateSemaphor implements Runnable {
             oldState = green;
             state = yellow;
             colorEnum = GreenTYellowRed;
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Green.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         }
     }
 
@@ -98,11 +99,7 @@ public class StateSemaphor implements Runnable {
             oldState = red;
             state = yellow;
             colorEnum = GreenTYellowRed;
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Red.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
         }
 
     }
@@ -120,11 +117,7 @@ public class StateSemaphor implements Runnable {
                 oldState = yellow;
                 colorEnum = GreenYellowTRed;
             }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Yellow.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           
         }
     }
 }

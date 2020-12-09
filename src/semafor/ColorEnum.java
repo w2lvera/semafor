@@ -18,6 +18,7 @@ public enum ColorEnum {
         this.green = green;
         this.yellow = yellow;
         this.red = red;
+        
     }
     
     public boolean green;

@@ -31,7 +31,7 @@ public class GraphicsModel extends Observable {
         if (colorEnum != null) {
             g.setColor(Color.red);
             int x = -88, y = -88;
-            if (colorEnum.green) {
+            if (colorEnum.red) {
                 g.fillOval(165 + x, 100 + y, -2 * x, -2 * y);
             } else {
                 g.drawOval(165 + x, 100 + y, -2 * x, -2 * y);
@@ -43,7 +43,7 @@ public class GraphicsModel extends Observable {
                 g.drawOval(165 + x, 285 + y, -2 * x, -2 * y);
             }
             g.setColor(Color.green);
-            if (colorEnum.red) {
+            if (colorEnum.green) {
                 g.fillOval(165 + x, 470 + y, -2 * x, -2 * y);
             } else {
                 g.drawOval(165 + x, 470 + y, -2 * x, -2 * y);
