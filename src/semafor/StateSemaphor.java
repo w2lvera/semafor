@@ -15,9 +15,8 @@ public class StateSemaphor implements Runnable {
     ChangeColor state;
     ChangeColor oldState;
     GraphicsModel gm;
-    ColorEnum colorEnum;
     boolean suspendFlag = false;
-    int time;
+    
 
     public StateSemaphor(GraphicsModel model) {
         green = new Green();
@@ -25,24 +24,18 @@ public class StateSemaphor implements Runnable {
         yellow = new Yellow();
         state = green;
         oldState = green;
-        time = 10;
         gm = model;
-        colorEnum = ColorEnum.TGreenYellowRed;
         suspendFlag = false;
     }
 
-    public ColorEnum print() {
-        return colorEnum;
-    }
-
     public void changeState() {
-        state.changeColor();
+        gm.setColor(state.getColorEnum());
         try {
-                Thread.sleep(100);
+                Thread.sleep(state.count);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Green.class.getName()).log(Level.SEVERE, null, ex);
             }
-        gm.setColor(colorEnum);
+        state.changeColor();
     }
 
     @Override
@@ -76,46 +69,60 @@ public class StateSemaphor implements Runnable {
         notify();
     }
 
-    public interface ChangeColor {
+    public abstract class ChangeColor {
+        public int count=500;
+        ColorEnum colorEnum;
 
-        void changeColor();
+        public ColorEnum getColorEnum() {
+            return colorEnum;
+        }
+        
+        public abstract void changeColor();
     }
 
-    public class Green implements ChangeColor {
+    public class Green extends ChangeColor {
+
+        public Green() {
+           colorEnum = TGreenYellowRed; 
+        }
 
         @Override
         public void changeColor() {
             oldState = green;
             state = yellow;
-            colorEnum = GreenTYellowRed;
-            
         }
     }
 
-    public class Red implements ChangeColor {
+    public class Red extends ChangeColor {
+
+        public Red() {
+            colorEnum = GreenYellowTRed; 
+        }
 
         @Override
         public void changeColor() {
             oldState = red;
             state = yellow;
-            colorEnum = GreenTYellowRed;
-            
         }
 
     }
 
-    public class Yellow implements ChangeColor {
+    public class Yellow extends ChangeColor {
+
+        public Yellow() {
+            count = 100;
+            colorEnum = GreenTYellowRed; 
+        }
 
         @Override
         public void changeColor() {
             if (oldState == red) {
                 state = green;
                 oldState = yellow;
-                colorEnum = TGreenYellowRed;
-            } else {
+            } 
+            else {
                 state = red;
                 oldState = yellow;
-                colorEnum = GreenYellowTRed;
             }
            
         }

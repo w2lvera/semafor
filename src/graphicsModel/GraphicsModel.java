@@ -12,22 +12,18 @@ import static semafor.ColorEnum.TGreenYellowRed;
 
 public class GraphicsModel extends Observable {
 
-    Color green = Color.green;
-    Color red = Color.red;
-    Color yellow = Color.yellow;
+    
     ColorEnum colorEnum;
-    RectangularShape oneShape = new Ellipse2D.Double();
-    RectangularShape shape[] = new RectangularShape[3];
+    
 
     public GraphicsModel() {
-        Point2D loc = new Point2D.Double();
+       
         colorEnum = TGreenYellowRed;
-        //oneShape.setFrame(loc, size);
+        
     }
 
     public void paint(Graphics g) {
-        //   this.setBackground(Color.black );
-        //  super.paintComponent(g);
+        
         if (colorEnum != null) {
             g.setColor(Color.red);
             int x = -88, y = -88;
